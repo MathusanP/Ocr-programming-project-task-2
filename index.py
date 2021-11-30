@@ -1,8 +1,5 @@
 import random
 import time
-dice_one = random.randint(0, 6)
-dice_two = random.randint(0, 6)
-
 
 def loginsystem():
     print("Welcome to the dice game!")
@@ -37,23 +34,28 @@ def loginsystem():
             print("There will be 5 rounds in this game")
             time.sleep(1)
             print("Each player gets to roll 2 dices in each round, if the sum of the 2 dices rolled is an equal number the player gains")
+            time.sleep(3)
             ### End of login system ###
 
 
 def roll():
     points = 0
+    dice_one = random.randint(0, 6)
+    dice_two = random.randint(0, 6)
+
+
     dice_total = dice_one + dice_two
     points = dice_total + points
     if dice_total % 2 == 0:
         points = points + 10
     else:
         points = points - 5
-    return(points)
+    return points
 
 
 def dice_roll():
     score_one = 0
-    score_two = 0
+    score_two = 0   
     for i in range(1, 5):
         score_one += roll()
         print(f'In this round, player 1 has {score_one} points.')
@@ -62,16 +64,20 @@ def dice_roll():
         print(f'In this round, player 2 has {score_two} points.')
         time.sleep(1)
     if score_one > score_two:
-        winner = "Player 1"
-        winning_score = score_one
         print(f"Well done player 1! You won with a score of {score_one}")
+        statement = str("Player 2 had a score of", score_one)
+        f = open("scoreboard.txt", "a")
+        f.write(statement)
     elif score_two > score_one:
-        winner = "Player 2"
-        winning_score = score_two
         print(f"Well done player 2! You won with a score of {score_two}")
+        ustatement = str("Player 2 had a score of", score_two)
+        f = open("scoreboard.txt", "a")
+        f.write(ustatement)
     else:
         print("Tie game!")
-        break
+
+
+
 loginsystem()
 roll()
 dice_roll()
