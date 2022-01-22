@@ -1,4 +1,4 @@
-# Code written by mathusan class:11b/cs1
+# Code written by mathusan 
 import random
 import time
 import sys
