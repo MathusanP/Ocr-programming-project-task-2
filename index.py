@@ -1,6 +1,9 @@
+# Code written by mathusan class:11b/cs1
 import random
 import time
+import sys
 
+# The login system #
 def loginsystem():
     print("Welcome to the dice game!")
     time.sleep(1)
@@ -14,6 +17,8 @@ def loginsystem():
     if i == 1:
         print("You've been locked out! Please try again later!")
         time.sleep(3)
+        exit()
+        
 
     else:
         print("Player 1 has logged in!")
@@ -28,6 +33,7 @@ def loginsystem():
         if i == 1:
             print("You've been locked out, please try again later!")
             time.sleep(3)
+            exit()
         else:
             print("Player 2 has logged in!")
             time.sleep(2)
@@ -36,13 +42,10 @@ def loginsystem():
             print("Each player gets to roll 2 dices in each round, if the sum of the 2 dices rolled is an equal number the player gains")
             time.sleep(3)
             ### End of login system ###
-
-
 def roll():
     points = 0
     dice_one = random.randint(0, 6)
     dice_two = random.randint(0, 6)
-
 
     dice_total = dice_one + dice_two
     points = dice_total + points
@@ -51,31 +54,38 @@ def roll():
     else:
         points = points - 5
     return points
+    ### End of defining as to how we roll the dice ###
+
+    ### Rolling the dice ###
 
 
 def dice_roll():
     score_one = 0
-    score_two = 0   
+    score_two = 0
     for i in range(1, 5):
         score_one += roll()
-        print(f'In this round, player 1 has {score_one} points.')
+        print("In this round, player 1 has", score_one, "points.")
         time.sleep(1)
         score_two += roll()
-        print(f'In this round, player 2 has {score_two} points.')
+        print("In this round, player 2 has", score_two, "points.")
         time.sleep(1)
+        ### Result if player 1 won ###
     if score_one > score_two:
-        print(f"Well done player 1! You won with a score of {score_one}")
-        statement = str("Player 2 had a score of", score_one)
-        f = open("scoreboard.txt", "a")
+        print("Well done player 1! You won with a score of", str(score_one))
+        statement = str("Player 1 won with a score of:" + str(score_one))
+        f = open("scoreboard.txt", "a+")
+        f.write("\n")
         f.write(statement)
+        ### Result if player 2 won ###
     elif score_two > score_one:
-        print(f"Well done player 2! You won with a score of {score_two}")
-        ustatement = str("Player 2 had a score of", score_two)
-        f = open("scoreboard.txt", "a")
+        print("Well done player 2! You won with a score of", str(score_two))
+        ustatement = str("Player 2 won with a score of:" + str(score_two))
+        f = open("scoreboard.txt", "a+")
+        f.write("\n")
         f.write(ustatement)
+        ### Result if it was a tie ###
     else:
         print("Tie game!")
-
 
 
 loginsystem()
